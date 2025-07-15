@@ -1,0 +1,16 @@
+.row-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.btn-submit {
+  width: 30%;
+}

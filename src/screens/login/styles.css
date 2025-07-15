@@ -1,0 +1,15 @@
+.login-container {
+  align-self: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.btn-submit {
+  width: 200px;
+  padding: 5px;
+  margin-left: 15%;
+}

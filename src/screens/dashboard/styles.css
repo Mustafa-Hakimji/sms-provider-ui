@@ -1,0 +1,12 @@
+.dash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+
+.dash-button {
+  height: 200px;
+  width: 200px;
+  margin-right: 50px;
+}
