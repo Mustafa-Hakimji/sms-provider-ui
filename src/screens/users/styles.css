@@ -1,0 +1,18 @@
+.users-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.user-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  align-self: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid black;
+  margin-top: 20px;
+}

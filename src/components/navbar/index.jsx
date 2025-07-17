@@ -8,6 +8,7 @@ const NavBar = () => {
   const { name } = useContextHook();
   const navigation = useNavigate();
   const handleNavigation = (path) => {
+    console.log(path);
     navigation(path);
   };
 
@@ -37,24 +38,22 @@ const NavBar = () => {
               <a className="nav-link active">Your SMS Service Provider</a>
             </li>
           </ul>
-          {/* 
-                    <button 
-                       className="btn btn-outline-dark me-2" 
-                       type="button" 
-                       onClick={() => setShowSignupForm(true)}
-                       data-bs-toggle="modal" 
-                       data-bs-target="#signupModal"
-                       >
-                        Sign Up
-                    </button> */}
+
+          {/* <button
+            className="btn btn-outline-dark me-2"
+            type="button"
+            onClick={() => }
+          >
+            Sign Up
+          </button> */}
           {/* <button
             className="btn btn-outline-primary"
-            onClick={() => setShowSignupForm(true)}
+            onClick={() => handleNavigation("/users")}
             data-bs-toggle="modal"
             data-bs-target="#signupModal"
             type="button"
           >
-            User Info
+            User's List
           </button> */}
         </div>
       </div>

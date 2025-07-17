@@ -26,6 +26,14 @@ const Dashboard = () => {
         navigation(`/${path}`);
         break;
 
+      case "users":
+        if (!userData) {
+          alert("Please login first");
+          return;
+        }
+        navigation(`/${path}`);
+        break;
+
       default:
         navigation(`/`);
         break;
@@ -58,6 +66,13 @@ const Dashboard = () => {
           Logout
         </button>
       )}
+      <button
+        type="button"
+        class="btn dash-button btn-outline-primary"
+        onClick={() => handleNavigation("users")}
+      >
+        Users List
+      </button>
     </div>
   );
 };

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import CustomInput from "../../components/customInput";
 import "./styles.css";
-import { ALL_FIELDS_ARE_REQUIRED } from "../../utils/constants/messages";
+import {
+  ALL_FIELDS_ARE_REQUIRED,
+  USER_ADDED_SUCCESS,
+} from "../../utils/constants/messages";
 
 const AddUser = () => {
   const [ic, setIc] = useState("");
@@ -92,15 +95,12 @@ const AddUser = () => {
         console.log("formattedResponse--> ", formattedResponse.user);
         const message = `Welcome to MHOW ${formattedResponse.user?.name}`;
         // clearAllStates();
-
-        console.log("sms api data --> ", {
-          message,
-          number: formattedResponse.user?.mobile,
-        });
         await sendSms({
           message,
           number: `+${formattedResponse.user?.mobile}`,
         });
+
+        alert(USER_ADDED_SUCCESS);
       }
     } catch (error) {
       console.error("Error Adding User --> ", error);

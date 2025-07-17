@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import AddUser from "./screens/addUser";
 import Dashboard from "./screens/dashboard";
 import Login from "./screens/login";
+import Users from "./screens/users";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="/add-user" element={<AddUser />} />
           <Route path="/log-in" element={<Login />} />
+          <Route path="/users" element={<Users />} />
         </Route>
       </Routes>
     </ContextProvider>
