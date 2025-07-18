@@ -47,6 +47,8 @@ class UserInfo extends React.Component {
           accnDate,
         } = this.state;
 
+        this.setStateCommon("loading", true);
+
         const response = await fetch(API_URL.addUser, {
           method: "POST",
           headers: headerJson,
@@ -64,7 +66,6 @@ class UserInfo extends React.Component {
             accnDate,
           }),
         });
-        this.setStateCommon("loading", true);
         if (response.ok) {
           const fromattedResponse = await response.json();
           console.log(fromattedResponse);

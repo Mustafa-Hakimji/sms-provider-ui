@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 const AddUser = () => {
   const inputWidth = 80;
   const params = useParams();
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
   const getActiveClass = (val) => {
     if (val === step) {
