@@ -10,6 +10,7 @@
   padding: 10px;
   margin-right: 10px;
   border-radius: 10px;
+  width: 40%;
 }
 
 .active-toggle {
@@ -19,4 +20,5 @@
   padding: 10px;
   margin-right: 10px;
   border-radius: 10px;
+  width: 40%;
 }

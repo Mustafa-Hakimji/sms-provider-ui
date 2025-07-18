@@ -120,7 +120,7 @@ const ServiceHistory = () => {
         setText={(text) => setOccupiedAccom(text)}
       />
 
-      <h4 style={{ marginTop: "20px" }}>
+      <h4 style={{ marginTop: "20px", color: "white" }}>
         In accordance with SQC rules, I claim/do not claim ante date of{" "}
         {displayYears} Years {displayMonths} Months {displayDays} Days Ante date
         Fd Seniority cert is att. The cert must be signed consigned by Stn HQ.
@@ -146,7 +146,7 @@ const ServiceHistory = () => {
         />
       </div>
 
-      <h4 style={{ marginTop: "20px" }}>
+      <h4 style={{ marginTop: "20px", color: "white" }}>
         I have served prior to my posting at MHOW in operational areas as under,
         and I did not stay with family for a period of 3 months or more at any
         time during the period mentioned above (Fd Area cert for last duty stn
@@ -209,7 +209,7 @@ const ServiceHistory = () => {
         value={familyStay2}
       />
 
-      <h4 style={{ marginTop: "20px" }}>
+      <h4 style={{ marginTop: "20px", color: "white" }}>
         Details of convinience held (Give Make and Veh Registration number.)
       </h4>
 
@@ -230,7 +230,7 @@ const ServiceHistory = () => {
         />
       </div>
 
-      <h4 style={{ marginTop: "20px" }}>
+      <h4 style={{ marginTop: "20px", color: "white" }}>
         (NOTE: Through endeavor will be made to accomodate on request based on
         Preference. However Preference of accn mentioned by Offris not a
         guarentee for almt of accn at preferred locality/Enclave).
@@ -268,7 +268,7 @@ const ServiceHistory = () => {
           placeholder="Agree"
           className="check-box"
         />
-        <h4 style={{ marginTop: "20px" }}>
+        <h4 style={{ marginTop: "20px", color: "white" }}>
           I hereby agreed to abide by rules, regulations and bylaws and
           subsewuent amendments, related with the accn alloted to me incl the
           colony/residential area association bylaws in existence, or as and
