@@ -1,7 +1,32 @@
+.info-container {
+  background: linear-gradient(135deg, #3b5323, #ff9933);
+}
+
+.add-main-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .row-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 30px;
+  width: 90%;
+}
+
+.row-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.check-box {
+  height: 20px;
+  width: 20px;
+  margin-right: 20px;
 }
 
 .button-container {
@@ -11,6 +36,49 @@
   margin-top: 50px;
 }
 
-.btn-submit {
+.button-container {
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.button-submit {
+  width: 20%;
+  background-color: rgb(38, 116, 217);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 0;
+  font-size: 20px;
+  color: white;
+  /* margin: 0 0; Optional: center inside block layout too */
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+.add-user-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0px 20px;
+  margin: 30px 0px;
+}
+
+.add-user-steps-button {
   width: 30%;
+  border: none;
+  border-radius: 10px;
+  background-color: grey;
+  color: white;
+  padding: 10px 0px;
+}
+
+.add-user-steps-button-active {
+  width: 30%;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(15, 85, 176);
+  color: white;
+  padding: 10px 0px;
 }

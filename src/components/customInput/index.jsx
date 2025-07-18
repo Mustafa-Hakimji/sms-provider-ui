@@ -11,30 +11,35 @@ const CustomInput = ({
   inputStyles = {},
   inputNote = "",
   width = 100,
+  titleStyle = {},
+  disabled = false,
+  point = "",
 }) => {
   return (
-    <div className="input-container">
-      <div className="mb-2 input-div mt-2" style={containerStyle}>
-        {title && (
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            {title}
-          </label>
-        )}
+    <div className="mb-2 input-div" style={containerStyle}>
+      {title && (
+        <h5 htmlFor="exampleInputEmail1" className="title" style={titleStyle}>
+          {point}
+          {title}
+        </h5>
+      )}
 
-        <input
-          className="form-control input-box"
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={(e) => setText(e.target.value)}
-          style={{ ...inputStyles, width: `${width}%` }}
-        />
-        {inputNote && (
-          <div id="emailHelp" className="form-text">
-            {inputNote}
-          </div>
-        )}
-      </div>
+      <input
+        className="input-box"
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+        style={{ ...inputStyles, width: `${width}%` }}
+        disabled={disabled}
+      />
+      {inputNote && (
+        <div id="emailHelp" className="form-text">
+          {inputNote}
+        </div>
+      )}
     </div>
   );
 };

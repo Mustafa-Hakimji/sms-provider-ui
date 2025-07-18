@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContextHook } from "../../providers";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.jpeg";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
 
@@ -14,9 +14,10 @@ const NavBar = () => {
 
   const [showSignupForm, setShowSignupForm] = useState(false);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light bg-color">
       <div className="container-fluid justify-content-center align-items-center">
         <div
+          style={{ color: "white", fontSize: "25px" }}
           onClick={() => {
             handleNavigation("/");
           }}
@@ -33,12 +34,6 @@ const NavBar = () => {
           className="collapse navbar-collapse home-container"
           id="navbarSupportedContent"
         >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active">Your SMS Service Provider</a>
-            </li>
-          </ul>
-
           {/* <button
             className="btn btn-outline-dark me-2"
             type="button"

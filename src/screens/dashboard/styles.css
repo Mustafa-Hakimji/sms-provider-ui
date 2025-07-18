@@ -2,11 +2,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15%;
+  height: 80vh;
+}
+
+.dash-heading {
+  margin-bottom: 30px;
+  color: aliceblue;
+  font-size: xx-large;
+}
+
+.dash-sub-container {
+  width: 40%;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  flex-direction: column;
+  background: linear-gradient(135deg, #3b5323, #ff9933);
 }
 
 .dash-button {
-  height: 200px;
+  /* height: 200px; */
   width: 200px;
   margin-right: 50px;
+}
+
+.input-number {
+  width: 80%;
+  margin-bottom: 30px;
 }

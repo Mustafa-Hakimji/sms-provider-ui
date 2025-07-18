@@ -11,6 +11,7 @@ const ContextProvider = ({ children }: any) => {
   const [name, setName] = useState("Mustafa");
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [userData, setUserData] = useState<null | {}>(null);
+  const [number, setNumber] = useState("");
 
   useEffect(() => {});
 
@@ -40,6 +41,8 @@ const ContextProvider = ({ children }: any) => {
     userData,
     setUserData,
     updateProviderAndLocalStorage,
+    number,
+    setNumber,
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

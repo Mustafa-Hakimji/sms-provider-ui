@@ -1,0 +1,22 @@
+.toggle-container {
+  margin-left: 5%;
+  margin: 20px 0px;
+}
+
+.toggle {
+  border: none;
+  background-color: grey;
+  color: white;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.active-toggle {
+  border: none;
+  background-color: rgb(46, 90, 222);
+  color: white;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+}

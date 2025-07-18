@@ -5,15 +5,34 @@
   width: 100%;
   align-self: center;
   justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
 }
 
 .input-div {
-  width: 70%;
+  width: 100%;
   /* background-color: red; */
+  /* background-color: blue; */
+  /* display: flex; */
+  /* border: 1px solid grey; */
+  /* align-self: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
 }
 
 .input-box {
+  border-radius: 10px;
   width: 100%;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid darkolivegreen;
+  outline: none;
+  box-shadow: none;
+}
+.title {
+  text-align: left;
+  align-self: flex-start;
+  color: white;
 }

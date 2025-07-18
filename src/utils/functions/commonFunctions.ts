@@ -14,3 +14,8 @@ export const getStorageItem = (key: string) => {
     return value;
   }
 };
+
+export const isValidMobileNumber = (number: string) => {
+  const regex = /^[6-9]\d{9}$/;
+  return regex.test(number);
+};

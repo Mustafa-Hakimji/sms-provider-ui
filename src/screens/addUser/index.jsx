@@ -3,36 +3,35 @@ import CustomInput from "../../components/customInput";
 import "./styles.css";
 import {
   ALL_FIELDS_ARE_REQUIRED,
+  COMPLETE_STEP,
   USER_ADDED_SUCCESS,
 } from "../../utils/constants/messages";
+import { useContextHook } from "../../providers";
+import UserInfo from "./components/userInfo";
+import FamilyInfo from "./components/familyInfo";
+import ServiceHistory from "./components/serviceHistory";
+import { useParams } from "react-router-dom";
 
 const AddUser = () => {
-  const [ic, setIc] = useState("");
-  const [rank, setRank] = useState("");
-  const [name, setName] = useState("");
-  const [cdaAcNo, setCdaAcNo] = useState("");
-  const [unit, setUnit] = useState("");
-  const [appointment, setAppointment] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [reportingDate, setReportingDate] = useState("");
-  const [dob, setDob] = useState("");
-  const [marriageDate, setMarriageDate] = useState("");
-  const [commissionDate, setCommissionDate] = useState("");
-  const [accnDate, setAccnDate] = useState("");
+  const { number } = useContextHook();
+  const inputWidth = 80;
+  const params = useParams();
+  const [step, setStep] = useState(1);
 
-  const clearAllStates = () => {
-    setIc("");
-    setRank("");
-    setName("");
-    setCdaAcNo("");
-    setUnit("");
-    setAppointment("");
-    setMobile("");
-    setReportingDate("");
-    setDob("");
-    setMarriageDate("");
-    setCommissionDate("");
-    setAccnDate("");
+  const getActiveClass = (val) => {
+    if (val === step) {
+      return "add-user-steps-button-active";
+    } else {
+      return "add-user-steps-button";
+    }
+  };
+
+  const handleStepClick = (val) => {
+    if (val < step) {
+      setStep(val);
+    } else {
+      alert(COMPLETE_STEP);
+    }
   };
 
   const sendSms = async ({
@@ -54,23 +53,8 @@ const AddUser = () => {
 
   const handleSubmit = async () => {
     try {
-      if (
-        !ic ||
-        !rank ||
-        !name ||
-        !cdaAcNo ||
-        !unit ||
-        !appointment ||
-        !mobile ||
-        !reportingDate ||
-        !dob ||
-        !marriageDate ||
-        !commissionDate ||
-        !accnDate
-      ) {
-        alert(ALL_FIELDS_ARE_REQUIRED);
-        return;
-      }
+      setStep(step + 1);
+      return;
 
       const response = await fetch("http://localhost:9000/users", {
         method: "POST",
@@ -106,130 +90,51 @@ const AddUser = () => {
       console.error("Error Adding User --> ", error);
     }
   };
+
   return (
-    <div className="login-main-container">
-      <div className="row-container">
-        <CustomInput
-          title="IC"
-          placeholder="Enter IC"
-          type="text"
-          value={ic}
-          setText={(text) => setIc(text)}
-          inputNote
-        />
-        <CustomInput
-          title="Rank"
-          placeholder="Enter Rank"
-          type="text"
-          value={rank}
-          setText={(text) => setRank(text)}
-          inputNote
-        />
-      </div>
-
-      <div className="row-container">
-        <CustomInput
-          title="Name"
-          placeholder="Enter Name"
-          type="text"
-          value={name}
-          setText={(text) => setName(text)}
-          inputNote
-        />
-        <CustomInput
-          title="CDA (O) A/C No."
-          placeholder="Enter CDA (O) A/C No."
-          type="text"
-          value={cdaAcNo}
-          setText={(text) => setCdaAcNo(text)}
-          inputNote
-        />
-      </div>
-
-      <div className="row-container">
-        <CustomInput
-          title="Unit"
-          placeholder="Enter Unit"
-          type="text"
-          value={unit}
-          setText={(text) => setUnit(text)}
-          inputNote
-        />
-        <CustomInput
-          title="Appointment"
-          placeholder="Enter Appointmet"
-          type="text"
-          value={appointment}
-          setText={(text) => setAppointment(text)}
-          inputNote
-        />
-      </div>
-
-      <div className="row-container">
-        <CustomInput
-          title="Mobile"
-          placeholder="Enter Mobile number"
-          type="text"
-          value={mobile}
-          setText={(text) => setMobile(text)}
-          inputNote
-        />
-        <CustomInput
-          title="Date of reported"
-          placeholder="Enter date of reported"
-          type="text"
-          value={reportingDate}
-          setText={(text) => setReportingDate(text)}
-          inputNote
-        />
-      </div>
-
-      <div className="row-container">
-        <CustomInput
-          title="Date of birth"
-          placeholder="Enter D.O.B."
-          type="text"
-          value={dob}
-          setText={(text) => setDob(text)}
-          inputNote
-        />
-        <CustomInput
-          title="Date of marriage"
-          placeholder="Enter Marriage anniversary date"
-          type="text"
-          value={marriageDate}
-          setText={(text) => setMarriageDate(text)}
-          inputNote
-        />
-      </div>
-
-      <div className="row-container">
-        <CustomInput
-          title="Date of commission & seniority"
-          placeholder="Enter commission date"
-          type="text"
-          value={commissionDate}
-          setText={(text) => setCommissionDate(text)}
-          inputNote
-        />
-        <CustomInput
-          title="Date from which accn is reqd"
-          placeholder="Enter accn date"
-          type="text"
-          value={accnDate}
-          setText={(text) => setAccnDate(text)}
-          inputNote
-        />
-      </div>
-      <div className="button-container">
-        <button
-          type="button"
-          class="btn btn-submit btn-primary btn-lg"
-          // onClick={handleSubmit}
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
+    <div className="info-container">
+      <div className="add-main-container">
+        <div className="add-user-steps">
+          <button
+            onClick={() => handleStepClick(1)}
+            className={getActiveClass(1)}
+          >
+            Personal Info
+          </button>
+          <button
+            onClick={() => handleStepClick(2)}
+            className={getActiveClass(2)}
+          >
+            Family Info
+          </button>
+          <button
+            onClick={() => handleStepClick(3)}
+            className={getActiveClass(3)}
+          >
+            Declarations Info
+          </button>
+        </div>
+        {step === 1 && (
+          <UserInfo
+            setStep={setStep}
+            number={params?.number}
+            inputWidth={inputWidth}
+          />
+        )}
+        {step === 2 && (
+          <FamilyInfo
+            number={params?.number}
+            setStep={setStep}
+            inputWidth={inputWidth}
+          />
+        )}
+        {step === 3 && (
+          <ServiceHistory
+            number={params?.number}
+            setStep={setStep}
+            inputWidth={inputWidth}
+          />
+        )}
       </div>
     </div>
   );

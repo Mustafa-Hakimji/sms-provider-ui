@@ -1,47 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
 import { useContextHook } from "../../providers";
+import { NUMBER_VALIDATION } from "../../utils/constants/regex";
+import CustomInput from "../../components/customInput";
+import { isValidMobileNumber } from "../../utils/functions/commonFunctions";
+import { ENTER_VALID_NUMBER } from "../../utils/constants/messages";
+import { API_URL, headerJson } from "../../utils/apis";
 
 const Dashboard = () => {
   const navigation = useNavigate();
-  const { userData, setUserData } = useContextHook();
+  const [number, setNumber] = useState("");
 
-  const handleNavigation = (path) => {
-    switch (path) {
-      case "log-out":
-        setUserData(null);
-        navigation(`/${"log-in"}`);
-        break;
-
-      case "log-in":
-        navigation(`/${path}`);
-        break;
-
-      case "add-user":
-        if (!userData) {
-          alert("Please login first");
-          return;
-        }
-        navigation(`/${path}`);
-        break;
-
-      case "users":
-        if (!userData) {
-          alert("Please login first");
-          return;
-        }
-        navigation(`/${path}`);
-        break;
-
-      default:
-        navigation(`/`);
-        break;
+  const handleInput = (e) => {
+    const val = e;
+    if (val === "" || NUMBER_VALIDATION.test(val)) {
+      setNumber(val);
     }
   };
+
+  const addUser = async () => {
+    try {
+      if (!isValidMobileNumber(number)) {
+        alert(ENTER_VALID_NUMBER);
+        return;
+      }
+
+      const response = await fetch(API_URL.addUser, {
+        method: "POST",
+        headers: headerJson,
+        body: JSON.stringify({ mobile: number }),
+      });
+
+      if (response.ok) {
+        const fromattedResponse = await response.json();
+        navigation(`/add-user/${number}`);
+      }
+    } catch (error) {
+      console.log("Add USER Error--> ", error);
+    }
+  };
+
   return (
     <div className="dash-container">
-      <button
+      <div className="dash-sub-container">
+        <div className="input-number">
+          <h3 className="dash-heading">Welcome to MHOW Cantt.</h3>
+          <CustomInput
+            title="Please Provide your Mobile number"
+            value={number}
+            setText={(e) => {
+              handleInput(e);
+            }}
+            placeholder="Enetr mobile number here"
+            width={100}
+            titleStyle={{ color: "white" }}
+          />
+        </div>
+
+        <div>
+          <button
+            onClick={() => addUser()}
+            type="button"
+            className="btn dash-button btn-primary"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
+
+{
+  /* <button
         onClick={() => handleNavigation("add-user")}
         type="button"
         class="btn dash-button btn-outline-primary"
@@ -72,9 +106,5 @@ const Dashboard = () => {
         onClick={() => handleNavigation("users")}
       >
         Users List
-      </button>
-    </div>
-  );
-};
-
-export default Dashboard;
+      </button> */
+}
