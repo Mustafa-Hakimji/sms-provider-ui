@@ -7,10 +7,12 @@ import CustomInput from "../../components/customInput";
 import { isValidMobileNumber } from "../../utils/functions/commonFunctions";
 import { ENTER_VALID_NUMBER } from "../../utils/constants/messages";
 import { API_URL, headerJson } from "../../utils/apis";
+import Loading from "../../components/loading";
 
 const Dashboard = () => {
   const navigation = useNavigate();
   const [number, setNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (e) => {
     const val = e;
@@ -25,7 +27,7 @@ const Dashboard = () => {
         alert(ENTER_VALID_NUMBER);
         return;
       }
-
+      setLoading(true);
       const response = await fetch(API_URL.addUser, {
         method: "POST",
         headers: headerJson,
@@ -38,6 +40,8 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.log("Add USER Error--> ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,6 +72,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
+      {loading && <Loading />}
     </div>
   );
 };

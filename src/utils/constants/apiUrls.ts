@@ -1,4 +1,4 @@
 export const environment = {
   local: "http://localhost:9000",
-  live: "",
+  live: "https://sms-service-provider-mhow-station.onrender.com",
 };

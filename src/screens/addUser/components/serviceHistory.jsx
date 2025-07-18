@@ -7,6 +7,7 @@ import {
   AGREE_TERMS,
   WELCOME_MESSAGE,
 } from "../../../utils/constants/messages";
+import Loading from "../../../components/loading";
 
 const ServiceHistory = () => {
   const navigation = useNavigate();
@@ -30,6 +31,7 @@ const ServiceHistory = () => {
   const [preference2, setPreference2] = useState("");
   const [preference3, setPreference3] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const displayYears = years ? years : " ____ ";
   const displayMonths = months ? months : " ____ ";
@@ -45,7 +47,8 @@ const ServiceHistory = () => {
     number = params?.mobile,
   }) => {
     try {
-      const response = await fetch("http://localhost:9000/send", {
+      setLoading(true);
+      const response = await fetch(API_URL.send, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, number }),
@@ -54,6 +57,8 @@ const ServiceHistory = () => {
       console.log("message response --> ", response);
     } catch (error) {
       console.error("Error sending message--> ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,6 +68,8 @@ const ServiceHistory = () => {
         alert(AGREE_TERMS);
         return;
       }
+
+      setLoading(true);
       const response = await fetch(API_URL.addUser, {
         method: "POST",
         headers: headerJson,
@@ -98,6 +105,8 @@ const ServiceHistory = () => {
       }
     } catch (error) {
       console.log("Add USER Error--> ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -276,6 +285,7 @@ const ServiceHistory = () => {
           Next
         </button>
       </div>
+      {loading && <Loading />}
     </div>
   );
 };

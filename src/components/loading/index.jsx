@@ -1,10 +1,11 @@
 import React from "react";
+import "./styles.css";
 
 const Loading = () => {
   return (
-    <div class="text-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div className="text-center">
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
       </div>
     </div>
   );

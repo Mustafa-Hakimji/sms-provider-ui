@@ -2,6 +2,7 @@ import React from "react";
 import "../styles.css";
 import CustomInput from "../../../components/customInput";
 import { API_URL, headerJson } from "../../../utils/apis";
+import Loading from "../../../components/loading";
 
 class UserInfo extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class UserInfo extends React.Component {
       dob: "",
       commissionDate: "",
       accnDate: "",
+      loading: false,
     };
   }
 
@@ -62,7 +64,7 @@ class UserInfo extends React.Component {
             accnDate,
           }),
         });
-
+        this.setStateCommon("loading", true);
         if (response.ok) {
           const fromattedResponse = await response.json();
           console.log(fromattedResponse);
@@ -70,6 +72,8 @@ class UserInfo extends React.Component {
         }
       } catch (error) {
         console.log("Add USER Error--> ", error);
+      } finally {
+        this.setStateCommon("loading", false);
       }
     };
 
@@ -85,6 +89,7 @@ class UserInfo extends React.Component {
       dob,
       commissionDate,
       accnDate,
+      loading,
     } = this.state;
     return (
       <div className="add-main-container">
@@ -215,6 +220,7 @@ class UserInfo extends React.Component {
             Next
           </button>
         </div>
+        {loading && <Loading />}
       </div>
     );
   }

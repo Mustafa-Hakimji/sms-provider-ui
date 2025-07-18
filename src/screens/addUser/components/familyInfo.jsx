@@ -3,6 +3,7 @@ import "../styles.css";
 import CustomInput from "../../../components/customInput";
 import Toggler from "../../../components/toggler";
 import { API_URL, headerJson } from "../../../utils/apis";
+import Loading from "../../../components/loading";
 
 class FamilyInfo extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class FamilyInfo extends React.Component {
       isMarried: false,
       isDependent: false,
       mobile: this.props?.number,
+      loading: false,
     };
   }
 
@@ -63,6 +65,8 @@ class FamilyInfo extends React.Component {
           mobile,
         } = this.state;
 
+        this.setStateCommon("loading", true);
+
         const response = await fetch(API_URL.addUser, {
           method: "POST",
           headers: headerJson,
@@ -94,6 +98,8 @@ class FamilyInfo extends React.Component {
         }
       } catch (error) {
         console.log("Add USER Error--> ", error);
+      } finally {
+        this.setStateCommon("loading", false);
       }
     };
 
@@ -114,6 +120,7 @@ class FamilyInfo extends React.Component {
       dependent2Relation,
       dependent3Relation,
       dependent4Relation,
+      loading,
     } = this.state;
     return (
       <div className="add-main-container">
@@ -300,6 +307,7 @@ class FamilyInfo extends React.Component {
             Next
           </button>
         </div>
+        {loading && <Loading />}
       </div>
     );
   }
