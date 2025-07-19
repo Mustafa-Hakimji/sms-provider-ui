@@ -6,13 +6,15 @@ import AddUser from "./screens/addUser";
 import Dashboard from "./screens/dashboard";
 import Login from "./screens/login";
 import Users from "./screens/users";
+import SendMessage from "./screens/sendMessages";
 
 function App() {
   return (
     <ContextProvider>
       <Routes>
         <Route path="/" element={<Home />}>
-          <Route index element={<Dashboard />} />
+          {/* <Route index element={<Dashboard />} /> */}
+          <Route index element={<SendMessage />} />
           <Route path="/add-user/:number" element={<AddUser />} />
           <Route path="/log-in" element={<Login />} />
           <Route path="/users" element={<Users />} />
