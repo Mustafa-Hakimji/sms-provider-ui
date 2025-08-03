@@ -38,7 +38,7 @@ const Dashboard = () => {
         navigation(`/add-user/${number}`);
       }
     } catch (error) {
-      console.log("Add USER Error--> ", error);
+      console.error("Add USER Error--> ", error);
     } finally {
       setLoading(false);
     }

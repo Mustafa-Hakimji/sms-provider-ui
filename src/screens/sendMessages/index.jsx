@@ -47,8 +47,6 @@ const SendMessage = () => {
       });
 
       if (response.ok) {
-        const formResp = await response.json();
-        console.log("message response --> ", formResp);
         alert(`Message sent successfully.\n ${message}\nto ${number}`);
         clearAllStates();
       }

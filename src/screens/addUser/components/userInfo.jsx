@@ -3,6 +3,7 @@ import "../styles.css";
 import CustomInput from "../../../components/customInput";
 import { API_URL, headerJson } from "../../../utils/apis";
 import Loading from "../../../components/loading";
+import { ALL_FIELDS_ARE_REQUIRED } from "../../../utils/constants/messages";
 
 class UserInfo extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class UserInfo extends React.Component {
     this.state = {
       ic: "",
       rank: "",
-      userName: "",
+      name: "",
       cdaAcNo: "",
       unit: "",
       appointment: "",
@@ -36,7 +37,7 @@ class UserInfo extends React.Component {
         const {
           ic,
           rank,
-          userName,
+          name,
           cdaAcNo,
           unit,
           appointment,
@@ -47,6 +48,22 @@ class UserInfo extends React.Component {
           accnDate,
         } = this.state;
 
+        if (
+          !ic ||
+          !rank ||
+          !name ||
+          !cdaAcNo ||
+          !unit ||
+          !appointment ||
+          !mobile ||
+          !reportingDate ||
+          !dob ||
+          !commissionDate ||
+          !accnDate
+        ) {
+          alert(ALL_FIELDS_ARE_REQUIRED);
+          return;
+        }
         this.setStateCommon("loading", true);
 
         const response = await fetch(API_URL.addUser, {
@@ -55,7 +72,7 @@ class UserInfo extends React.Component {
           body: JSON.stringify({
             ic,
             rank,
-            userName,
+            name,
             cdaAcNo,
             unit,
             appointment,
@@ -67,12 +84,10 @@ class UserInfo extends React.Component {
           }),
         });
         if (response.ok) {
-          const fromattedResponse = await response.json();
-          console.log(fromattedResponse);
           this.props.setStep(2);
         }
       } catch (error) {
-        console.log("Add USER Error--> ", error);
+        console.error("Add USER Error--> ", error);
       } finally {
         this.setStateCommon("loading", false);
       }
@@ -81,7 +96,7 @@ class UserInfo extends React.Component {
     const {
       ic,
       rank,
-      userName,
+      name,
       cdaAcNo,
       unit,
       appointment,
@@ -121,8 +136,8 @@ class UserInfo extends React.Component {
             title="Name"
             placeholder="Enter Name"
             type="text"
-            value={userName}
-            setText={(text) => this.setStateCommon("userName", text)}
+            value={name}
+            setText={(text) => this.setStateCommon("name", text)}
             inputNote
           />
           <CustomInput
@@ -171,7 +186,7 @@ class UserInfo extends React.Component {
             width={inputWidth}
             title="Date of reported"
             placeholder="Enter date of reported"
-            type="text"
+            type="date"
             value={reportingDate}
             setText={(text) => this.setStateCommon("reportingDate", text)}
             inputNote
@@ -183,7 +198,7 @@ class UserInfo extends React.Component {
             width={inputWidth}
             title="Date of birth"
             placeholder="Enter D.O.B."
-            type="text"
+            type="date"
             value={dob}
             setText={(text) => this.setStateCommon("dob", text)}
             inputNote
@@ -192,7 +207,7 @@ class UserInfo extends React.Component {
             width={inputWidth}
             title="Date of commission & seniority"
             placeholder="Enter commission date"
-            type="text"
+            type="date"
             value={commissionDate}
             setText={(text) => this.setStateCommon("commissionDate", text)}
             inputNote
@@ -204,7 +219,7 @@ class UserInfo extends React.Component {
             width={40}
             title="Date from which accn is reqd"
             placeholder="Enter accn date"
-            type="text"
+            type="date"
             value={accnDate}
             setText={(text) => this.setStateCommon("accnDate", text)}
             inputNote

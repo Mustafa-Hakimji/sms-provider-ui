@@ -1,5 +1,5 @@
-export const setStorageItem = (key: string, value: string) => {
-  let formattedVal = key;
+export const setStorageItem = (key: string, value: any) => {
+  let formattedVal = value;
   if (typeof value !== "string") {
     formattedVal = JSON.stringify(value);
   }

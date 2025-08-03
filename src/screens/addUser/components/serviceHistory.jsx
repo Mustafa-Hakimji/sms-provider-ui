@@ -53,8 +53,6 @@ const ServiceHistory = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message, number }),
       });
-
-      console.log("message response --> ", response);
     } catch (error) {
       console.error("Error sending message--> ", error);
     } finally {
@@ -97,14 +95,12 @@ const ServiceHistory = () => {
       });
 
       if (response.ok) {
-        const fromattedResponse = await response.json();
-        console.log(fromattedResponse);
         await sendSms({ message: WELCOME_MESSAGE, number: params?.number });
         alert(WELCOME_MESSAGE);
-        setTimeout(() => navigation("/"), 3000);
+        setTimeout(() => navigation("/"));
       }
     } catch (error) {
-      console.log("Add USER Error--> ", error);
+      console.error("Add USER Error--> ", error);
     } finally {
       setLoading(false);
     }

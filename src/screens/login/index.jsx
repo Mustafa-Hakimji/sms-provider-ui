@@ -8,6 +8,9 @@ import {
 import { useContextHook } from "../../providers";
 import Loading from "../../components/loading";
 import { useNavigate } from "react-router-dom";
+import { API_URL, headerJson } from "../../utils/apis";
+import { setStorageItem } from "../../utils/functions/commonFunctions";
+import { USER_DATA } from "../../utils/constants/localStorageKeys";
 
 const Login = () => {
   const { setUserData } = useContextHook();
@@ -17,7 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const inputWidth = 40;
+  const inputWidth = 100;
 
   const handleSubmit = async () => {
     try {
@@ -33,18 +36,16 @@ const Login = () => {
 
       setLoading(true);
 
-      const response = await fetch("http://localhost:9000/log/in", {
+      const response = await fetch(API_URL.login, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headerJson,
         body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log({ data });
         setUserData(data?.staff);
+        setStorageItem(USER_DATA, data?.staff);
         navigation("/");
       } else {
         const error = await response.json();
@@ -58,30 +59,28 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <CustomInput
-        title="Email"
-        placeholder="Enter your email here"
-        value={email}
-        setText={(text) => setEmail(text)}
-        width={inputWidth}
-      />
-      <CustomInput
-        title="Password"
-        placeholder="Enter your password here"
-        value={password}
-        setText={(text) => setPassword(text)}
-        type="password"
-        width={inputWidth}
-      />
+      <div className="login-form">
+        <CustomInput
+          title="Email"
+          placeholder="Enter your email here"
+          value={email}
+          setText={(text) => setEmail(text)}
+          width={inputWidth}
+        />
+        <CustomInput
+          title="Password"
+          placeholder="Enter your password here"
+          value={password}
+          setText={(text) => setPassword(text)}
+          type="password"
+          width={inputWidth}
+        />
 
-      <div className="button-container">
-        <button
-          type="button"
-          class="btn btn-submit btn-primary btn-lg"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
+        <div className="button-container">
+          <button type="button" className="btn-submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        </div>
       </div>
       {loading && <Loading />}
     </div>

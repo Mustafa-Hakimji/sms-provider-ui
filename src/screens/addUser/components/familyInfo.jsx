@@ -4,6 +4,7 @@ import CustomInput from "../../../components/customInput";
 import Toggler from "../../../components/toggler";
 import { API_URL, headerJson } from "../../../utils/apis";
 import Loading from "../../../components/loading";
+import { DEPENDENT_NAME, WIFE_NAME } from "../../../utils/constants/messages";
 
 class FamilyInfo extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class FamilyInfo extends React.Component {
       dependent2Relation: "",
       dependent3Relation: "",
       dependent4Relation: "",
-      isMarried: false,
+      isMarried: true,
       isDependent: false,
       mobile: this.props?.number,
       loading: false,
@@ -37,7 +38,6 @@ class FamilyInfo extends React.Component {
 
   setStateCommon = (stateName, value) => {
     this.setState({ [stateName]: value });
-    console.log(this.state[stateName]);
   };
   render() {
     const { inputWidth } = this.props;
@@ -64,6 +64,16 @@ class FamilyInfo extends React.Component {
           dependent4Relation,
           mobile,
         } = this.state;
+
+        if (isMarried && !wifeName) {
+          alert(WIFE_NAME);
+          return;
+        }
+
+        if (isDependent && !dependent1) {
+          alert(DEPENDENT_NAME);
+          return;
+        }
 
         this.setStateCommon("loading", true);
 
@@ -93,11 +103,11 @@ class FamilyInfo extends React.Component {
 
         if (response.ok) {
           const fromattedResponse = await response.json();
-          console.log(fromattedResponse);
+          g(fromattedResponse);
           this.props.setStep(3);
         }
       } catch (error) {
-        console.log("Add USER Error--> ", error);
+        console.warn("Add USER Error--> ", error);
       } finally {
         this.setStateCommon("loading", false);
       }
@@ -148,7 +158,7 @@ class FamilyInfo extends React.Component {
                 width={inputWidth}
                 title="Marrige Date"
                 placeholder="Enter date"
-                type="text"
+                type="date"
                 value={marriageDate}
                 setText={(text) => this.setStateCommon("marriageDate", text)}
                 inputNote
