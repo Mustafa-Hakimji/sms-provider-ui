@@ -15,7 +15,6 @@ const NavBar = () => {
 
   const handleNavigation = (path) => {
     navigation(path);
-    return;
   };
 
   const handleLogout = () => {
@@ -67,14 +66,21 @@ const NavBar = () => {
                   User's List
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary me-2"
                   onClick={() => handleNavigation("/dashboard")}
-                  data-bs-toggle="modal"
-                  data-bs-target="#signupModal"
                   type="button"
                 >
                   Add New User
                 </button>
+                {userData?.role === "admin" && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleNavigation("/staff")}
+                    type="button"
+                  >
+                    Add New Staff
+                  </button>
+                )}
               </>
             ) : (
               <button

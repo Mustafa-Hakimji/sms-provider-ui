@@ -10,6 +10,7 @@ import SendMessage from "./screens/sendMessages";
 import UserData from "./screens/userData";
 import ChangePassword from "./screens/changePassword";
 import MultipleMessage from "./screens/sendMultipleMessages";
+import AddStaff from "./screens/addStaff";
 
 function App() {
   const { userData } = useContextHook();
@@ -25,6 +26,7 @@ function App() {
         <Route path="/user-data" element={<UserData />} />
         <Route path="/change" element={<ChangePassword />} />
         <Route path="/send" element={<MultipleMessage />} />
+        <Route path="/staff" element={<AddStaff />} />
       </Route>
     </Routes>
   );

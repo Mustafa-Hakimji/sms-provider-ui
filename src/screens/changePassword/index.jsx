@@ -8,7 +8,7 @@ const ChangePassword = () => {
   const inputWidth = 100;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newpassword, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const clearStates = () => {
@@ -20,9 +20,9 @@ const ChangePassword = () => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(API_URL.staffs, {
-        method: "PUT",
+        method: "PATCH",
         headers: headerJson,
-        body: JSON.stringify({ email, password, newpassword }),
+        body: JSON.stringify({ email, password, newPassword }),
       });
 
       const resJson = await response.json();
@@ -58,7 +58,7 @@ const ChangePassword = () => {
         <CustomInput
           title="New Password"
           placeholder="Enter your new password here"
-          value={newpassword}
+          value={newPassword}
           setText={(text) => setNewPassword(text)}
           type="password"
           width={inputWidth}
