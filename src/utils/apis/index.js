@@ -1,6 +1,6 @@
 import { environment } from "../constants/environment";
 
-export const BASE_URL = environment.local;
+export const BASE_URL = environment.live;
 
 export const API_URL = {
   addUser: `${BASE_URL}/users`,
